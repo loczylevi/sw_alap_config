@@ -1,0 +1,44 @@
+en
+conf t
+hostname 13
+
+
+
+
+line console 0
+password class
+login
+end
+
+en
+conf t
+banner motd #!---SZERVER SZOBA---!#
+
+no ip domain-lookup
+ip ssh version 2
+ip domain-name wmtech.hu
+
+
+crypto key generate rsa
+1024
+username admin secret class
+enable secret cisco
+line vty 0 15
+login local
+transport input ssh
+exit
+
+
+
+en 
+conf t
+
+int vlan 99
+ip address 192.168.1.246 255.255.255.0
+no shut
+exit
+ip default-gateway 192.168.1.1
+
+
+
+
