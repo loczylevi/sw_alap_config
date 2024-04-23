@@ -1,0 +1,36 @@
+en
+conf t
+hostname R_1
+
+
+
+
+line console 0
+password class_1
+login
+end
+
+en
+conf t
+banner motd #!---SZERVER SZOBA---!#
+
+no ip domain-lookup
+ip ssh version 2
+ip domain-name wmtech.hu
+
+
+crypto key generate rsa
+1024
+username loczy secret class_1
+enable secret cisco
+line vty 0 15
+login local
+transport input ssh
+exit
+
+
+ip dhcp pool 88
+default-router 192.168.7.94
+network 192.168.7.80 255.255.255.240
+dns-server 8.8.8.8
+domain-name wmtech.hu
