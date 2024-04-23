@@ -1,0 +1,186 @@
+R_1#sh running-config
+Building configuration...
+
+Current configuration : 3113 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R_1
+!
+boot-start-marker
+boot-end-marker
+!
+logging message-counter syslog
+enable secret 5 $1$P7P.$8sqRvynKE/s0AFD4CsamF1
+!
+no aaa new-model
+!
+!
+dot11 syslog
+ip source-route
+!
+!
+ip dhcp excluded-address 192.168.7.13
+ip dhcp excluded-address 192.168.7.14
+ip dhcp excluded-address 192.168.7.30
+ip dhcp excluded-address 192.168.7.29
+ip dhcp excluded-address 192.168.7.46
+ip dhcp excluded-address 192.168.7.45
+ip dhcp excluded-address 192.168.7.62
+ip dhcp excluded-address 192.168.7.61
+ip dhcp excluded-address 192.168.7.94
+ip dhcp excluded-address 192.168.7.93
+ip dhcp excluded-address 192.168.7.78
+ip dhcp excluded-address 192.168.7.77
+!
+ip dhcp pool 10
+   network 192.168.7.0 255.255.255.240
+   default-router 192.168.7.14
+   dns-server 8.8.8.8
+   domain-name wmtech.hu
+!
+ip dhcp pool 20
+   network 192.168.7.16 255.255.255.240
+   default-router 192.168.7.30
+   dns-server 8.8.8.8
+   domain-name wmtech.hu
+!
+ip dhcp pool 30
+   network 192.168.7.32 255.255.255.240
+   default-router 192.168.7.46
+   dns-server 8.8.8.8
+   domain-name wmtech.hu
+!
+ip dhcp pool 40
+   network 192.168.7.48 255.255.255.240
+   default-router 192.168.7.62
+   dns-server 8.8.8.8
+   domain-name wmtech.hu
+!
+ip dhcp pool 99
+   network 192.168.7.64 255.255.255.240
+   default-router 192.168.7.78
+   dns-server 8.8.8.8
+   domain-name wmtech.hu
+!
+ip dhcp pool 88
+   network 192.168.7.80 255.255.255.240
+   default-router 192.168.7.94
+   dns-server 8.8.8.8
+   domain-name wmtech.hu
+!
+!
+ip cef
+no ip domain lookup
+ip domain name wmtech.hu
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+username loczy secret 5 $1$OzFa$E7HZyys2DMi/iEFPQrzQC0
+!
+!
+!
+archive
+ log config
+  hidekeys
+!
+!
+!
+!
+!
+interface FastEthernet0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet0.10
+ encapsulation dot1Q 10
+ ip address 192.168.7.14 255.255.255.240
+!
+interface FastEthernet0.20
+ encapsulation dot1Q 20
+ ip address 192.168.7.30 255.255.255.240
+!
+interface FastEthernet0.30
+ encapsulation dot1Q 30
+ ip address 192.168.7.46 255.255.255.240
+!
+interface FastEthernet0.40
+ encapsulation dot1Q 40
+ ip address 192.168.7.62 255.255.255.240
+!
+interface FastEthernet0.88
+ encapsulation dot1Q 88
+ ip address 192.168.7.94 255.255.255.240
+!
+interface FastEthernet0.99
+ encapsulation dot1Q 99
+ ip address 192.168.7.78 255.255.255.240
+!
+interface FastEthernet1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface BRI0
+ no ip address
+ encapsulation hdlc
+ shutdown
+!
+interface FastEthernet2
+!
+interface FastEthernet3
+!
+interface FastEthernet4
+!
+interface FastEthernet5
+!
+interface FastEthernet6
+!
+interface FastEthernet7
+!
+interface FastEthernet8
+!
+interface FastEthernet9
+!
+interface Vlan1
+ no ip address
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+banner motd ^C!---SZERVER SZOBA---!^C
+!
+line con 0
+ password class_1
+ login
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+end
+
+R_1#
